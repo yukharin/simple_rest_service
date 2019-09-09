@@ -19,8 +19,10 @@ public class CarService {
 
     @Transactional(rollbackFor = Exception.class)
     public Car getCarById(long id) {
-        return carRepository.findById(id).orElse(null);
+        return carRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("There is no such entity"));
     }
+
 
     @Transactional(rollbackFor = Exception.class)
     public void createCar(@Valid Car car) {

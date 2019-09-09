@@ -21,6 +21,7 @@ public class CarController {
 
     @GetMapping
     public List<Car> getCars() {
+        System.err.println("I AM HERE!");
         return carService.cars();
     }
 
