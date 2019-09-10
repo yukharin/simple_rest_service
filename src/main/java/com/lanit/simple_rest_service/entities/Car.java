@@ -29,7 +29,7 @@ public class Car {
 
     @NotNull
     @JoinColumn(name = "id_person", referencedColumnName = "id", nullable = false)
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Person owner;
 
 }

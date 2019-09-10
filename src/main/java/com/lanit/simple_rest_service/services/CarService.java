@@ -9,10 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.List;
 
 @Service
 public class CarService {
+
+    private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    private static Validator validator = factory.getValidator();
 
     @Autowired
     private CarRepository carRepository;
@@ -25,7 +31,7 @@ public class CarService {
 
 
     @Transactional(rollbackFor = Exception.class)
-    public void createCar(@Valid Car car) {
+    public void createCar(Car car) {
         boolean exists = carRepository.findById(car.getId()).isPresent();
         if (exists) {
             throw new EntityExistsException("This entity already exists.");

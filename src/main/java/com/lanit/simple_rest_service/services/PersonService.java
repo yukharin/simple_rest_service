@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.List;
 
 @Service
@@ -17,13 +20,17 @@ public class PersonService {
     @Autowired
     PersonRepository personRepository;
 
+    private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    private static Validator validator = factory.getValidator();
+
     @Transactional(rollbackFor = Exception.class)
     public Person getPersonById(long id) {
         return personRepository.findById(id).orElse(null);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void createPerson(@Valid Person person) {
+    public void createPerson(Person person) {
+        validator.validate(person);
         boolean exists = personRepository.findById(person.getId()).isPresent();
         if (exists) {
             throw new EntityExistsException("This entity already exists.");

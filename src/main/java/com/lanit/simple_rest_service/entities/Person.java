@@ -1,13 +1,16 @@
 package com.lanit.simple_rest_service.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -26,9 +29,7 @@ public class Person {
     @NotNull
     @Past
     @Column(name = "birthdate", nullable = false)
-    private Date birthDate;
-
-    @OneToMany
-    private List<Car> cars;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    private Date birthdate;
 
 }
