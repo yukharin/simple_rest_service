@@ -67,4 +67,9 @@ public class PersonService {
         return personRepository.findAll();
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public long countPersons() {
+        return personRepository.count();
+    }
+
 }

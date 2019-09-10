@@ -15,6 +15,7 @@ import javax.validation.Validation;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -80,6 +81,16 @@ public class CarService {
     @Transactional(rollbackFor = Exception.class)
     public Iterable<Car> cars() {
         return carRepository.findAll();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<Car> findByOwnerId(long id) {
+        return carRepository.findByOwnerId(id);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public long countCars() {
+        return carRepository.count();
     }
 
 }
