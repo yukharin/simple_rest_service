@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequestMapping("/car")
 @RestController
 public class CarController {
@@ -24,26 +22,25 @@ public class CarController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<Car> getCars() {
-        System.err.println("I AM HERE!");
+    public Iterable<Car> getCars() {
         return carService.cars();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public Car getCar(@PathVariable Long id) {
+    public Car getCar(@PathVariable long id) {
         return carService.getCarById(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public void deleteCar(@PathVariable Long id) {
+    public void deleteCar(@PathVariable long id) {
         carService.deleteById(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
-    public void updateCar(@PathVariable Long id, @RequestBody Car car) {
+    public void updateCar(@PathVariable long id, @RequestBody Car car) {
         carService.updateCar(id, car);
     }
 
