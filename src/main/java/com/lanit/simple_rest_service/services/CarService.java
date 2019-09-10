@@ -93,4 +93,9 @@ public class CarService {
         return carRepository.count();
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteAll() {
+        carRepository.deleteAll();
+    }
+
 }
