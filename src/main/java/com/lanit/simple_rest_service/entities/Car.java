@@ -14,10 +14,11 @@ import javax.validation.constraints.Positive;
 @Table(name = "cars")
 public class Car {
 
+    @Positive
     @NotNull
     @Id
     @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
 
     @NotNull
     @Pattern(regexp = "^([a-zA-Z]+)([\\-])([a-zA-Z0-9]+)$")
