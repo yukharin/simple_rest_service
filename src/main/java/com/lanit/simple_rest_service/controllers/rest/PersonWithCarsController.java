@@ -14,9 +14,9 @@ public class PersonWithCarsController {
     private PersonWithCarsService personWithCarsService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{id}")
-    public PersonWithCars getPersonWithCar(@PathVariable long id) {
-        return personWithCarsService.getPerson(id);
+    @GetMapping
+    public PersonWithCars getPersonWithCar(@RequestParam long personid) {
+        return personWithCarsService.getPerson(personid);
     }
 
 }
