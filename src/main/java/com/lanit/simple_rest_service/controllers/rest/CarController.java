@@ -16,7 +16,6 @@ public class CarController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
     public void saveCar(@RequestBody Car car) {
-        System.err.println("CAR: " + car);
         carService.createCar(car);
     }
 

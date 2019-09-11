@@ -9,6 +9,6 @@ public class Statistics {
 
     private long carCount;
 
-    private long uniqueVendorCount;
+    private long uniqueModelCount;
 
 }

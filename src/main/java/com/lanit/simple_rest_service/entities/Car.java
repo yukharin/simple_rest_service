@@ -1,9 +1,11 @@
 package com.lanit.simple_rest_service.entities;
 
+import com.lanit.simple_rest_service.custom_validators.Adult;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
 
@@ -18,6 +20,7 @@ public class Car {
     private long id;
 
     @NotNull
+    @Pattern(regexp = "^([a-zA-Z]+)([\\-])([a-zA-Z0-9]+)$")
     @Column(name = "model", nullable = false)
     private String model;
 
@@ -26,7 +29,7 @@ public class Car {
     @Column(name = "horsepower", nullable = false)
     private int horsepower;
 
-
+    @Adult
     @NotNull
     @JoinColumn(name = "id_person", referencedColumnName = "id", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)

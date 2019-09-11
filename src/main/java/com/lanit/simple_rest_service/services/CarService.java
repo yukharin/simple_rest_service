@@ -94,6 +94,11 @@ public class CarService {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    public long countUniqueNames() {
+        return carRepository.countUniqueNames();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public void deleteAll() {
         carRepository.deleteAll();
     }

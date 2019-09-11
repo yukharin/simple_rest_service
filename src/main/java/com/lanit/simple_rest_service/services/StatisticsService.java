@@ -12,13 +12,14 @@ public class StatisticsService {
     private CarService carService;
 
     @Autowired
-    private PersonWithCarsService personService;
+    private PersonService personService;
 
     @Transactional(rollbackFor = Exception.class)
     public Statistics getStatistics() {
         Statistics statistics = new Statistics();
         statistics.setCarCount(carService.countCars());
-        statistics.setPersonCount(carService.countCars());
+        statistics.setPersonCount(personService.countPersons());
+        statistics.setUniqueModelCount(carService.countUniqueNames());
         return statistics;
     }
 

@@ -18,7 +18,6 @@ public class PersonController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
     public void savePerson(@RequestBody Person person) {
-        System.err.println("PERSON: " + person);
         personService.createPerson(person);
     }
 
