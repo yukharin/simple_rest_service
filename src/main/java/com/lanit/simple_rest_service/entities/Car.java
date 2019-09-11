@@ -14,7 +14,6 @@ import javax.validation.constraints.Positive;
 @Table(name = "cars")
 public class Car {
 
-    @Positive
     @NotNull
     @Id
     @Column(name = "id", nullable = false)

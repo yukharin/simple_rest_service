@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Positive;
 import java.util.Date;
 
 @Data
@@ -19,7 +18,6 @@ import java.util.Date;
 @Table(name = "persons")
 public class Person {
 
-    @Positive
     @NotNull
     @Id
     @Column(name = "id", nullable = false)
