@@ -16,5 +16,5 @@ public class PersonWithCars {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate birthdate;
 
-    private List<Car> cars;
+    private List<CarDto> cars;
 }
