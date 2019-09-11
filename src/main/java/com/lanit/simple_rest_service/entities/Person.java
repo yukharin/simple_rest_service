@@ -2,8 +2,9 @@ package com.lanit.simple_rest_service.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.lanit.simple_rest_service.deserializer.LocalDateDeserializer;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,10 +28,10 @@ public class Person {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @NotNull
     @Past
     @Column(name = "birthdate", nullable = false)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate birthdate;
 
