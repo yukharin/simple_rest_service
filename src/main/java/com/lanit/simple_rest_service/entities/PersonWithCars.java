@@ -1,5 +1,6 @@
 package com.lanit.simple_rest_service.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,7 +13,8 @@ public class PersonWithCars {
 
     private String name;
 
-    private Date birthDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    private Date birthdate;
 
     private List<Car> cars;
 }
