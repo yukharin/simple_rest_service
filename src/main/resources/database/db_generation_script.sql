@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `rest_service`.`cars`
     `id`         BIGINT(20)   NOT NULL AUTO_INCREMENT,
     `model`      VARCHAR(80)  NOT NULL,
     `horsepower` INT UNSIGNED NOT NULL,
-    `id_person`  BIGINT(20)   NOT NULL,
+    `id_person`  BIGINT(20)   NULL,
     PRIMARY KEY (`id`),
     INDEX `id_person_idx` (`id_person` ASC) INVISIBLE,
     INDEX `model_index` (`model` ASC) VISIBLE,
