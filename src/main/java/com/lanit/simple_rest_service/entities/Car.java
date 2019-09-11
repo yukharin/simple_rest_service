@@ -37,10 +37,5 @@ public class Car {
     @ManyToOne(cascade = CascadeType.ALL)
     private Person owner;
 
-    public Car(CarDto carDto) {
-        this.id = carDto.getId();
-        this.model = carDto.getModel();
-        this.horsepower = carDto.getHorsepower();
-    }
 
 }
