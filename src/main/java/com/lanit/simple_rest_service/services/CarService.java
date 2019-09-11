@@ -44,7 +44,11 @@ public class CarService {
         });
         Person owner = personRepository.findById(carDto.getOwnerId()).orElseThrow(() ->
                 new ValidationException("This owner doesn't exist"));
-        Car car = new Car(carDto);
+        Car car = new Car();
+        car.setOwner(owner);
+        car.setModel(carDto.getModel());
+        car.setHorsepower(carDto.getHorsepower());
+        car.setId(carDto.getId());
         car.setOwner(owner);
         validator.validate(car);
         carRepository.save(car);

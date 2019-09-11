@@ -26,7 +26,12 @@ public class PersonWithCarsService {
         List<Car> cars = carService.findByOwnerId(id);
         List<CarDto> carDtos = new ArrayList<>();
         for (Car car : cars) {
-            carDtos.add(new CarDto(car));
+            CarDto carDto = new CarDto();
+            carDto.setId(car.getId());
+            carDto.setHorsepower(car.getHorsepower());
+            carDto.setModel(car.getModel());
+            carDto.setOwnerId(car.getOwner().getId());
+            carDtos.add(carDto);
         }
         personWithCars.setCars(carDtos);
         Person person = personService.getPersonById(id);

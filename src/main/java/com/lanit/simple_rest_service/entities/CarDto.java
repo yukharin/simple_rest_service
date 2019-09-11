@@ -15,11 +15,4 @@ public class CarDto {
 
     private Long ownerId;
 
-    public CarDto(Car car) {
-        this.id = car.getId();
-        this.model = car.getModel();
-        this.horsepower = car.getHorsepower();
-        this.ownerId = car.getOwner().getId();
-    }
-
 }
