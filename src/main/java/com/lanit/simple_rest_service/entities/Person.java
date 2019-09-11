@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -27,11 +27,11 @@ public class Person {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @NotNull
     @Past
     @Column(name = "birthdate", nullable = false)
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-    private Date birthdate;
+    private LocalDate birthdate;
 
 }
