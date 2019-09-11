@@ -25,7 +25,7 @@ public class PersonWithCarsService {
         personWithCars.setCars(cars);
         Person person = personService.getPersonById(id);
         personWithCars.setId(person.getId());
-        personWithCars.setBirthDate(person.getBirthdate());
+        personWithCars.setBirthdate(person.getBirthdate());
         personWithCars.setName(person.getName());
         return personWithCars;
     }
