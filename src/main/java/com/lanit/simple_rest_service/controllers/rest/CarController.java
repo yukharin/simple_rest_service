@@ -1,6 +1,7 @@
 package com.lanit.simple_rest_service.controllers.rest;
 
 import com.lanit.simple_rest_service.entities.Car;
+import com.lanit.simple_rest_service.entities.CarDto;
 import com.lanit.simple_rest_service.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ public class CarController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
-    public void saveCar(@RequestBody Car car) {
+    public void saveCar(@RequestBody CarDto car) {
         carService.createCar(car);
     }
 
