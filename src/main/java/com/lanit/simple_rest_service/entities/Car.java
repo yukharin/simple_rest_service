@@ -22,7 +22,7 @@ public class Car {
     private Long id;
 
     @NotNull
-    @Pattern(regexp = "^([a-zA-Z]+)([\\-])([a-zA-Z0-9]+)$")
+    @Pattern(regexp = "^([a-zA-Z0-9]+)([\\-])([a-zA-Z0-9\\-]+)$")
     @Column(name = "model", nullable = false)
     private String model;
 

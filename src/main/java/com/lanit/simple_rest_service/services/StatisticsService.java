@@ -17,9 +17,9 @@ public class StatisticsService {
     @Transactional(rollbackFor = Exception.class)
     public Statistics getStatistics() {
         Statistics statistics = new Statistics();
-        statistics.setCarCount(carService.countCars());
-        statistics.setPersonCount(personService.countPersons());
-        statistics.setUniqueModelCount(carService.countUniqueNames());
+        statistics.setCarcount(carService.countCars());
+        statistics.setPersoncount(personService.countPersons());
+        statistics.setUniquevendorcount(carService.countUniqueNames());
         return statistics;
     }
 

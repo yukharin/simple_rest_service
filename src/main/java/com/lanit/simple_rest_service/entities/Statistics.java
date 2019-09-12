@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class Statistics {
 
-    private long personCount;
+    private long personcount;
 
-    private long carCount;
+    private long carcount;
 
-    private long uniqueModelCount;
+    private long uniquevendorcount;
 
 }
