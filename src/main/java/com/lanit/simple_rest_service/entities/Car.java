@@ -1,6 +1,7 @@
 package com.lanit.simple_rest_service.entities;
 
 import com.lanit.simple_rest_service.custom_validators.Adult;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,28 +12,29 @@ import javax.validation.constraints.Positive;
 
 
 @Data
+@AllArgsConstructor
 @Entity
 @Table(name = "cars")
 @NoArgsConstructor
 public class Car {
 
-    @NotNull
+    @NotNull(message = "{car.id.notnull}")
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotNull
-    @Pattern(regexp = "^([a-zA-Z0-9]+)([\\-])([a-zA-Z0-9\\-]+)$")
+    @NotNull(message = "{car.model.notnull}")
+    @Pattern(regexp = "^([a-zA-Z0-9]+)([\\-])([a-zA-Z0-9\\-]+)$", message = "{car.model.pattern}")
     @Column(name = "model", nullable = false)
     private String model;
 
-    @Positive
-    @NotNull
+    @Positive(message = "{car.horsepower.positive}")
+    @NotNull(message = "{car.horsepower.notnull}")
     @Column(name = "horsepower", nullable = false)
-    private int horsepower;
+    private Integer horsepower;
 
-    @Adult
-    @NotNull
+    @NotNull(message = "{car.owner.notnull}")
+    @Adult(message = "{car.owner.adult}")
     @JoinColumn(name = "id_person", referencedColumnName = "id", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
     private Person owner;

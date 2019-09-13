@@ -40,8 +40,8 @@ public class CarController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
-    public void updateCar(@PathVariable long id, @RequestBody Car car) {
-        carService.updateCar(id, car);
+    public void updateCar(@PathVariable long id, @RequestBody CarDto carDto) {
+        carService.updateCar(id, carDto);
     }
 
 

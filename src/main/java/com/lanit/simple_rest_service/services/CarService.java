@@ -17,7 +17,6 @@ import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarService {
@@ -45,7 +44,6 @@ public class CarService {
         Person owner = personRepository.findById(carDto.getOwnerId()).orElseThrow(() ->
                 new ValidationException("This owner doesn't exist"));
         Car car = new Car();
-        car.setOwner(owner);
         car.setModel(carDto.getModel());
         car.setHorsepower(carDto.getHorsepower());
         car.setId(carDto.getId());
@@ -55,13 +53,12 @@ public class CarService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void updateCar(long id, @NonNull Car car) {
-        carRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("There is no entity to update."));
-        Optional.ofNullable(car.getOwner()).orElseThrow(() ->
-                new ValidationException("Car should have a field 'owner' non nullable"));
-        Person owner = personRepository.findById(car.getOwner().getId()).orElseThrow(() ->
+    public void updateCar(long id, @NonNull CarDto carDto) {
+        Car car = carRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("There is no entity to update."));
+        Person owner = personRepository.findById(carDto.getOwnerId()).orElseThrow(() ->
                 new ValidationException("User with this id doesn't exist."));
+        car.setHorsepower(carDto.getHorsepower());
+        car.setModel(carDto.getModel());
         car.setOwner(owner);
         validator.validate(car);
         carRepository.save(car);
