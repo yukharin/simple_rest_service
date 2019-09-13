@@ -33,8 +33,8 @@ public class Car {
     @Column(name = "horsepower", nullable = false)
     private Integer horsepower;
 
-    @NotNull(message = "{car.owner.notnull}")
     @Adult(message = "{car.owner.adult}")
+    @NotNull(message = "{car.owner.notnull}")
     @JoinColumn(name = "id_person", referencedColumnName = "id", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
     private Person owner;

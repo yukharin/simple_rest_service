@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Validation;
-import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.List;
@@ -42,7 +41,7 @@ public class CarService {
             throw new EntityExistsException("Entity with this id already exists");
         });
         Person owner = personRepository.findById(carDto.getOwnerId()).orElseThrow(() ->
-                new ValidationException("This owner doesn't exist"));
+                new EntityNotFoundException("This owner doesn't exist"));
         Car car = new Car();
         car.setModel(carDto.getModel());
         car.setHorsepower(carDto.getHorsepower());
@@ -56,7 +55,7 @@ public class CarService {
     public void updateCar(long id, @NonNull CarDto carDto) {
         Car car = carRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("There is no entity to update."));
         Person owner = personRepository.findById(carDto.getOwnerId()).orElseThrow(() ->
-                new ValidationException("User with this id doesn't exist."));
+                new EntityNotFoundException("User with this id doesn't exist."));
         car.setHorsepower(carDto.getHorsepower());
         car.setModel(carDto.getModel());
         car.setOwner(owner);
@@ -69,14 +68,6 @@ public class CarService {
         carRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("There is no entity to delete."));
         carRepository.deleteById(id);
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public void deleteCar(@NonNull Car car) {
-        validator.validate(car);
-        carRepository.findById(car.getId()).orElseThrow(() ->
-                new EntityNotFoundException("There is no entity to delete."));
-        carRepository.delete(car);
     }
 
     @Transactional(rollbackFor = Exception.class)

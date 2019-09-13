@@ -55,14 +55,6 @@ public class PersonService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void deletePerson(@NonNull Person person) {
-        personRepository.findById(person.getId()).orElseThrow(() ->
-                new EntityNotFoundException("There is no entity to delete."));
-        validator.validate(person);
-        personRepository.delete(person);
-    }
-
-    @Transactional(rollbackFor = Exception.class)
     public List<Person> persons() {
         return personRepository.findAll();
     }
