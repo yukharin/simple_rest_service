@@ -2,6 +2,7 @@ package com.lanit.simple_rest_service.controllers.rest;
 
 import com.lanit.simple_rest_service.entities.Statistics;
 import com.lanit.simple_rest_service.services.StatisticsService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/statistics")
 public class StatiscticsController {
 
+    private final StatisticsService statisticsService;
+
     @Autowired
-    private StatisticsService statisticsService;
+    public StatiscticsController(@NonNull final StatisticsService statisticsService) {
+        this.statisticsService = statisticsService;
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping

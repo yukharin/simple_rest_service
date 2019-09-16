@@ -1,11 +1,11 @@
 package com.lanit.simple_rest_service;
 
-import com.lanit.simple_rest_service.entities.Person;
+import com.lanit.simple_rest_service.entities.Car;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.time.LocalDate;
+import java.util.Optional;
 
 public class Main {
 
@@ -13,7 +13,8 @@ public class Main {
     private static Validator validator = vf.getValidator();
 
     public static void main(String[] args) {
-        Person person = new Person(-1L, "Kevin", LocalDate.of(1994, 7, 15));
-        validator.validate(person);
+        Car car = null;
+        Optional<Car> optional = Optional.ofNullable(car);
+        System.out.println(optional.orElseThrow(() -> new IllegalArgumentException()));
     }
 }

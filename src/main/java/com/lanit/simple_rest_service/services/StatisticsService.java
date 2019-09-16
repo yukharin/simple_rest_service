@@ -1,6 +1,7 @@
 package com.lanit.simple_rest_service.services;
 
 import com.lanit.simple_rest_service.entities.Statistics;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,11 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class StatisticsService {
 
-    @Autowired
-    private CarService carService;
+    private final CarService carService;
+    private final PersonService personService;
 
     @Autowired
-    private PersonService personService;
+    public StatisticsService(@NonNull final CarService carService,
+                             @NonNull final PersonService personService) {
+        this.carService = carService;
+        this.personService = personService;
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public Statistics getStatistics() {

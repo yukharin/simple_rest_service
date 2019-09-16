@@ -4,6 +4,7 @@ import com.lanit.simple_rest_service.entities.Car;
 import com.lanit.simple_rest_service.entities.CarDto;
 import com.lanit.simple_rest_service.entities.Person;
 import com.lanit.simple_rest_service.entities.PersonWithCars;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +15,15 @@ import java.util.List;
 @Service
 public class PersonWithCarsService {
 
-    @Autowired
-    private PersonService personService;
+    private final PersonService personService;
+    private final CarService carService;
 
     @Autowired
-    private CarService carService;
+    public PersonWithCarsService(@NonNull final PersonService personService,
+                                 @NonNull final CarService carService) {
+        this.personService = personService;
+        this.carService = carService;
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public PersonWithCars getPerson(long id) {

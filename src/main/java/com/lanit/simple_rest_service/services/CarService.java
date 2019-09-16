@@ -12,22 +12,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
-import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import java.util.List;
 
 @Service
 public class CarService {
 
-    private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    private static Validator validator = factory.getValidator();
+    private final Validator validator;
+    private final CarRepository carRepository;
+    private final PersonRepository personRepository;
 
     @Autowired
-    private CarRepository carRepository;
-
-    @Autowired
-    private PersonRepository personRepository;
+    public CarService(@NonNull final CarRepository carRepository,
+                      @NonNull final PersonRepository personRepository,
+                      @NonNull final Validator validator) {
+        this.carRepository = carRepository;
+        this.personRepository = personRepository;
+        this.validator = validator;
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public Car getCarById(long id) {
@@ -53,7 +55,8 @@ public class CarService {
 
     @Transactional(rollbackFor = Exception.class)
     public void updateCar(long id, @NonNull CarDto carDto) {
-        Car car = carRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("There is no entity to update."));
+        Car car = carRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("There is no entity to update."));
         Person owner = personRepository.findById(carDto.getOwnerId()).orElseThrow(() ->
                 new EntityNotFoundException("User with this id doesn't exist."));
         car.setHorsepower(carDto.getHorsepower());

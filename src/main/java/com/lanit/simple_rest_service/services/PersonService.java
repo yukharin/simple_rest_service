@@ -9,19 +9,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
-import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import java.util.List;
 
 @Service
 public class PersonService {
 
-    @Autowired
-    PersonRepository personRepository;
+    private final PersonRepository personRepository;
+    private final Validator validator;
 
-    private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    private static Validator validator = factory.getValidator();
+    @Autowired
+    public PersonService(@NonNull final PersonRepository personRepository,
+                         @NonNull final Validator validator) {
+        this.personRepository = personRepository;
+        this.validator = validator;
+    }
+
 
     @Transactional(rollbackFor = Exception.class)
     public Person getPersonById(long id) {

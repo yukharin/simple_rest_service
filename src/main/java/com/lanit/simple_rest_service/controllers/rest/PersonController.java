@@ -2,6 +2,7 @@ package com.lanit.simple_rest_service.controllers.rest;
 
 import com.lanit.simple_rest_service.entities.Person;
 import com.lanit.simple_rest_service.services.PersonService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,12 @@ import java.util.List;
 @RestController
 public class PersonController {
 
+    private final PersonService personService;
+
     @Autowired
-    private PersonService personService;
+    public PersonController(@NonNull final PersonService personService) {
+        this.personService = personService;
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
