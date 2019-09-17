@@ -14,7 +14,7 @@ public class AdultConstraintValidator implements ConstraintValidator<Adult, Pers
     @Override
     public boolean isValid(Person person, ConstraintValidatorContext constraintValidatorContext) {
         if (person != null) {
-            LocalDate date = person.getBirthDate();
+            LocalDate date = person.getBirthdate();
             return (Period.between(date, LocalDate.now())).getYears() >= ADULT_AGE;
         } else {
             return false;

@@ -37,6 +37,6 @@ public class Person {
     @Column(name = "birthdate", nullable = false)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-    private LocalDate birthDate;
+    private LocalDate birthdate;
 
 }

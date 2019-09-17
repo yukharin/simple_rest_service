@@ -11,7 +11,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/webAppContext.xml</param-value>
+        <param-value>classpath:/webAppContext.xml</param-value>
     </context-param>
 
     <welcome-file-list>
