@@ -1,6 +1,5 @@
 -- MySQL Workbench Forward Engineering
 
-SET MODE MYSQL;
 -- -----------------------------------------------------
 -- Schema rest_service
 -- -----------------------------------------------------
@@ -8,71 +7,36 @@ SET MODE MYSQL;
 -- -----------------------------------------------------
 -- Schema rest_service
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `rest_service` DEFAULT CHARACTER SET utf8;
-USE `rest_service`;
+
 
 -- -----------------------------------------------------
 -- Table `rest_service`.`persons`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rest_service`.`persons`
+CREATE TABLE persons
 (
     `id`        BIGINT(20)  NOT NULL AUTO_INCREMENT,
     `name`      VARCHAR(50) NOT NULL,
     `birthdate` DATE        NOT NULL,
-    PRIMARY KEY (`id`),
-    INDEX `name_index` (`name` ASC) VISIBLE,
-    INDEX `birtdate_index` (`birthdate` ASC) VISIBLE
-)
-    ENGINE = InnoDB;
+    PRIMARY KEY (`id`)
+);
 
 
 -- -----------------------------------------------------
 -- Table `rest_service`.`cars`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rest_service`.`cars`
+CREATE TABLE cars
 (
-    `id`         BIGINT(20)   NOT NULL AUTO_INCREMENT,
-    `model`      VARCHAR(80)  NOT NULL,
-    `horsepower` INT UNSIGNED NOT NULL,
-    `id_person`  BIGINT(20)   NULL,
+    `id`         BIGINT(20)  NOT NULL AUTO_INCREMENT,
+    `model`      VARCHAR(80) NOT NULL,
+    `horsepower` INT         NOT NULL,
+    `id_person`  BIGINT(20)  NULL,
     PRIMARY KEY (`id`),
-    INDEX `id_person_idx` (`id_person` ASC) INVISIBLE,
-    INDEX `model_index` (`model` ASC) VISIBLE,
-    CONSTRAINT `id_person`
-        FOREIGN KEY (`id_person`)
-            REFERENCES `rest_service`.`persons` (`id`)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
-)
-    ENGINE = InnoDB;
--- -----------------------------------------------------
--- Data for table `rest_service`.`persons`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `rest_service`;
-INSERT INTO `rest_service`.`persons` (`id`, `name`, `birthdate`)
-VALUES (1, 'Vlad', '1998-07-21');
-INSERT INTO `rest_service`.`persons` (`id`, `name`, `birthdate`)
-VALUES (2, 'Slava', '1997-06-21');
-INSERT INTO `rest_service`.`persons` (`id`, `name`, `birthdate`)
-VALUES (3, 'Kevin', '1996-05-24');
-INSERT INTO `rest_service`.`persons` (`id`, `name`, `birthdate`)
-VALUES (4, 'Karen', '1995-04-12');
-INSERT INTO `rest_service`.`persons` (`id`, `name`, `birthdate`)
-VALUES (5, 'Stas', '1996-05-09');
-
-COMMIT;
+    FOREIGN KEY (`id_person`)
+        REFERENCES persons (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
 
 
--- -----------------------------------------------------
--- Data for table `rest_service`.`cars`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `rest_service`;
-INSERT INTO `rest_service`.`cars` (`id`, `model`, `horsepower`, `id_person`)
-VALUES (1, 'BMW-X5', 600, 1);
-INSERT INTO `rest_service`.`cars` (`id`, `model`, `horsepower`, `id_person`)
-VALUES (2, 'BMW-X6', 650, 1);
 
-COMMIT;
 

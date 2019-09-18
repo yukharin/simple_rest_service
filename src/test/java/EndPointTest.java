@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class EndPointTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
+    @Order(value = 0)
     @Test
     void testClear() throws Exception {
 
@@ -56,6 +58,10 @@ public class EndPointTest {
 
     @Test
     void addValidPerson() throws Exception {
+
+        this.mockMvc.perform(get("/clear"))
+                .andExpect(status().isOk());
+
         String jsonPerson = "{\"id\":\"-100\",\"name\":\"Validperson1\",\"birthdate\":\"01.01.2000\"}";
         this.mockMvc.perform(post("/person")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -287,6 +293,10 @@ public class EndPointTest {
 
     @Test
     void addBadCarUnique() throws Exception {
+
+        this.mockMvc.perform(get("/clear"))
+                .andExpect(status().isOk());
+
         String jsonPerson = "{\"id\":\"-100\",\"name\":\"Validperson1\",\"birthdate\":\"01.01.2000\"}";
         this.mockMvc.perform(post("/person")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -309,6 +319,10 @@ public class EndPointTest {
 
     @Test
     void addValidCars() throws Exception {
+
+        this.mockMvc.perform(get("/clear"))
+                .andExpect(status().isOk());
+
         String jsonPerson = "{\"id\":\"-100\",\"name\":\"Validperson1\",\"birthdate\":\"01.01.2000\"}";
         this.mockMvc.perform(post("/person")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -392,6 +406,10 @@ public class EndPointTest {
 
     @Test
     void addBadCarModelFormat() throws Exception {
+
+        this.mockMvc.perform(get("/clear"))
+                .andExpect(status().isOk());
+
         String jsonPerson = "{\"id\":\"-100\",\"name\":\"Validperson1\",\"birthdate\":\"01.01.2000\"}";
         this.mockMvc.perform(post("/person")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)

@@ -12,7 +12,7 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
     List<Car> findByOwnerId(long id);
 
-    @Query(value = "SELECT count(*) as uniquevendorcount FROM (SELECT LEFT(model, LOCATE('-', model) - 1) as vendor  FROM cars group by vendor) as c; ", nativeQuery = true)
+    @Query(value = "SELECT count(*) as uniquevendorcount FROM (SELECT UPPER(LEFT(model, LOCATE('-', model) - 1)) as vendor  FROM cars group by vendor) as c; ", nativeQuery = true)
     Long countUniqueNames();
 
 }
