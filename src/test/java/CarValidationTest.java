@@ -122,9 +122,9 @@ public class CarValidationTest {
         Car car = new Car(1L, "BMW-X5", 25, null);
         Set<ConstraintViolation<Car>> violations = validator.validate(car);
         assertEquals(2, violations.size());
-        assertEquals("Owner field must not be null", violations.iterator().next().getMessage());
+        assertEquals("Owner's age must be more or equals to 18", violations.iterator().next().getMessage());
         assertEquals(null, violations.iterator().next().getInvalidValue());
-        assertEquals("{car.owner.notnull}", violations.iterator().next().getMessageTemplate());
+        assertEquals("{car.owner.adult}", violations.iterator().next().getMessageTemplate());
     }
 
     @Test

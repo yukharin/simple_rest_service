@@ -4,21 +4,15 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <context:component-scan base-package="com.lanit.simple_rest_service"/>
     <jpa:repositories base-package="com.lanit.simple_rest_service.repositories"/>
     <mvc:annotation-driven/>
 
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-          p:driverClassName="${driverClassName}"
-          p:url="${url}" p:username="${user}"
-          p:password="${password}"/>
-    <context:property-placeholder location="classpath:database/db.properties"/>
 
-    <bean id="transactionManager" class=
-            "org.springframework.orm.jpa.JpaTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
@@ -41,5 +35,18 @@
             </props>
         </property>
     </bean>
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+          p:driverClassName="${driverClassName}"
+          p:url="${url}" p:username="${user}"
+          p:password="${password}"/>
+    <context:property-placeholder location="classpath:database/db.properties"/>
+
+    <beans profile="test">
+        <jdbc:embedded-database id="dataSource" type="H2">
+            <jdbc:script location="classpath:database/db_generation_script.sql"/>
+        </jdbc:embedded-database>
+    </beans>
 
 </beans>
