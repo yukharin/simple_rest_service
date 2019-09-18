@@ -47,7 +47,6 @@ public class PersonService {
                 new EntityNotFoundException("There is no entity to update."));
         validator.validate(person);
         personRepository.save(person);
-
     }
 
     @Transactional(rollbackFor = Exception.class)
