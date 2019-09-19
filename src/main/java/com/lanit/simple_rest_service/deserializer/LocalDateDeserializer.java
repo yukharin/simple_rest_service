@@ -25,4 +25,5 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
         LocalDate local = LocalDate.parse(date, formatter);
         return local;
     }
+
 }

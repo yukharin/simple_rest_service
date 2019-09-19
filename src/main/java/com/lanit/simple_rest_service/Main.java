@@ -15,6 +15,6 @@ public class Main {
     public static void main(String[] args) {
         Car car = null;
         Optional<Car> optional = Optional.ofNullable(car);
-        System.out.println(optional.orElseThrow(() -> new IllegalArgumentException()));
+        System.out.println(optional.orElseThrow(IllegalArgumentException::new));
     }
 }

@@ -17,4 +17,5 @@ public class PersonWithCars {
     private LocalDate birthdate;
 
     private List<CarDto> cars;
+
 }
