@@ -23,7 +23,7 @@
         <javax.el.version>3.0.0</javax.el.version>
         <javax.servlet.version>3.1.0</javax.servlet.version>
         <hibernate.version>5.2.18.Final</hibernate.version>
-        <hibernate.validator.version>6.0.16.Final</hibernate.validator.version>
+        <hibernate.validator.version>6.0.20.Final</hibernate.validator.version>
         <guava.version>28.0-jre</guava.version>
         <junit5.version>5.5.0</junit5.version>
         <junit4.version>4.12</junit4.version>
